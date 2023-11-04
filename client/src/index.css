@@ -1,3 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --text: #060113;
+    --background: #f2ecfe;
+    --primary: #8eca0c;
+    --secondary: #c1fbd2;
+    --accent: #9fe30d;
+    --card: #eae5f6;
+    --button-text: #f1ecfe;
+  }
+  .dark {
+    --text: #f1ecfe;
+    --background: #070113;
+    --primary: #b7f335;
+    --secondary: #043e15;
+    --accent: #aef21c;
+    --card: #0f091a;
+    --button-text: #060113;
+  }
+}
+
+body {
+  background: var(--background);
+  font-family: "Nunito", "sans-serif";
+}
