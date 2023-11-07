@@ -20,7 +20,7 @@ const HeroSection = (props: HeroSectionProps) => {
           py-2
         "
       >
-        <div className="md:w-[588px] md:h-auto">
+        <div className="w-full h-full sm:w-[588px]">
           <HeroSectionSVG
             width="auto"
             height="auto"

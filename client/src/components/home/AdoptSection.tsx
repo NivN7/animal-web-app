@@ -57,17 +57,15 @@ const AdoptSection = (props: HeroSectionProps) => {
           lg:flex-row
           items-center
           justify-evenly
-          px-4
-          py-2
         "
       >
-        <div className="flex flex-col flex-wrap gap-8 w-min-[464px]">
+        <div className="flex flex-col flex-wrap gap-8 w-full sm:w-[544px]">
           {cards.map((card) => (
             <Card key={card.key} title={card.title} subtitle={card.subtitle} />
           ))}
         </div>
 
-        <div className="md:w-[627px] md:h-auto ml-4 mt-4 lg:mt-0">
+        <div className="w-full h-full sm:w-[627px] ml-4 mt-8 lg:mt-0">
           <AdoptSectionSVG
             width="auto"
             height="auto"

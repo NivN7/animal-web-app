@@ -74,7 +74,7 @@ const FaqSection = () => {
           Responses to common inquiries you may have.
         </p>
       </div>
-      <div className="flex flex-col  md:w-[544px]">
+      <div className="flex flex-col  w-full sm:w-[544px]">
         {accordions.map((accordion) => (
           <Accordion
             key={accordion.key}

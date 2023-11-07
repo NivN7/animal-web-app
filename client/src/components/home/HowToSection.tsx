@@ -14,7 +14,7 @@ const HowToSection = () => {
         className={`
           ${h2}
           text-center
-          mt-24
+          mt-12
           mb-12
         `}
       >
@@ -32,7 +32,7 @@ const HowToSection = () => {
           flex-wrap
         "
       >
-        <div className=" md:w-[544px]">
+        <div className="w-full sm:w-[544px]">
           <Card
             title="Adopting an Animal"
             subtitle="Search for your ideal animal using our search section. Browse the list of available pets."
@@ -42,7 +42,7 @@ const HowToSection = () => {
           />
         </div>
 
-        <div className=" md:w-[544px]">
+        <div className="w-full sm:w-[544px]">
           <Card
             title="Listing an Animal"
             subtitle="Log in or sign up to your profile."

@@ -4,10 +4,12 @@ import { ThemeContext } from "../contexts";
 import { ThemeContextInterface } from "../types";
 import IcAddSVG from "./svgs/IcAddSVG";
 import {
-  darkAccentColor,
+  h6,
+  p,
   ic_height,
   ic_width,
-  lightAccentColor,
+  darkTextColor,
+  lightTextColor,
 } from "../constants";
 
 export type AccordionProps = {
@@ -28,7 +30,7 @@ const Accordion = (props: AccordionProps) => {
           w-full 
           p-4 
           text-left 
-          text-textColor
+          ${h6}
           bg-secondaryColor
           hover:opacity-80
           transition 
@@ -49,13 +51,13 @@ const Accordion = (props: AccordionProps) => {
         >
           {darkTheme ? (
             <IcAddSVG
-              color={darkAccentColor}
+              color={darkTextColor}
               width={ic_width}
               height={ic_height}
             />
           ) : (
             <IcAddSVG
-              color={lightAccentColor}
+              color={lightTextColor}
               width={ic_width}
               height={ic_height}
             />
@@ -64,12 +66,12 @@ const Accordion = (props: AccordionProps) => {
       </button>
       {props.isOpen && (
         <div
-          className="
+          className={`
             p-4
-            text-textColor
+            ${p}
             bg-secondaryColor
             rounded-b-2xl
-          "
+          `}
         >
           {props.data}
         </div>
