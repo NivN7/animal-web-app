@@ -5,6 +5,7 @@ dotenv.config();
 import connectDB from "./db/connect.ts";
 import userRouter from "./routes/user-route.ts";
 import authRouter from "./routes/auth-route.ts";
+import { errorHandlerMiddleware } from "./utils/error.ts";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+
+app.use(errorHandlerMiddleware);
 
 const start = async () => {
   try {
