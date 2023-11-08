@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-interface IUser {
+interface DocumentResult<T> {
+  _doc: T;
+}
+
+interface IUser extends DocumentResult<IUser> {
   username: string;
   email: string;
   password: string;
