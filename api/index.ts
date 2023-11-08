@@ -3,10 +3,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import connectDB from "./db/connect.ts";
+import userRouter from "./routes/user-route.ts";
 
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+app.use("/api/user", userRouter);
 
 const start = async () => {
   try {
