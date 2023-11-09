@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
+import { useSelector } from "react-redux";
 
 import Button from "./Button";
 import IcSunSVG from "./svgs/IcSunSVG";
@@ -15,6 +16,7 @@ import {
   ic_width,
   ic_height,
 } from "../constants";
+import { UserStateInterface } from "../redux/user/userSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -24,6 +26,10 @@ const Navbar = () => {
   ) as ThemeContextInterface;
 
   const [toggle, setToggle] = useState(false);
+
+  const { currentUser } = useSelector(
+    (state: { user: UserStateInterface }) => state.user
+  );
 
   return (
     <nav
@@ -64,11 +70,21 @@ const Navbar = () => {
             <li className={navlistStyle}>Search</li>
           </Link>
 
-          <li>
-            <Button onClick={() => navigate("/sign-in")} primaryColor={true}>
-              Sign in
-            </Button>
-          </li>
+          {Object.keys(currentUser).length !== 0 ? (
+            <Link to="/profile">
+              <img
+                className="rounded-full h-10 w-10 object-cover"
+                src={currentUser?.avatar}
+                alt="profile"
+              />
+            </Link>
+          ) : (
+            <li>
+              <Button onClick={() => navigate("/sign-in")} primaryColor={true}>
+                Sign in
+              </Button>
+            </li>
+          )}
         </ul>
 
         <Button
@@ -154,9 +170,15 @@ const Navbar = () => {
                   <li className={navlistStyle}>Search</li>
                 </Link>
 
-                <Link to="/sign-in" onClick={() => setToggle(false)}>
-                  <li className={navlistStyle}>Sign-in</li>
-                </Link>
+                {Object.keys(currentUser).length !== 0 ? (
+                  <Link to="/profile" onClick={() => setToggle(false)}>
+                    <li className={navlistStyle}>Profile</li>
+                  </Link>
+                ) : (
+                  <Link to="/sign-in" onClick={() => setToggle(false)}>
+                    <li className={navlistStyle}>Sign-in</li>
+                  </Link>
+                )}
               </ul>
             </div>
           )}
