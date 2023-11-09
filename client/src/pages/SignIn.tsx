@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,7 @@ import {
   signInFailure,
   UserStateInterface,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -28,7 +29,7 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     console.log(formData);
@@ -69,7 +70,7 @@ const SignIn = () => {
       >
         Sign In
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4">
         <Input
           type="email"
           placeholder="email"
@@ -85,7 +86,7 @@ const SignIn = () => {
         />
 
         <Button
-          onClick={() => {}}
+          onClick={handleSubmit}
           disabled={loading}
           primaryColor={true}
           px="px-3"
@@ -94,6 +95,7 @@ const SignIn = () => {
         >
           {loading ? "Loading..." : "SIGN IN"}
         </Button>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-5">
         <p className={p}>Don't have an account?</p>

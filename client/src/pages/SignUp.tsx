@@ -1,9 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import Button from "../components/Button";
 import { h2, h6, p } from "../constants";
 import Input from "../components/Input";
+import OAuth from "../components/OAuth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -19,7 +20,7 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     console.log(formData);
@@ -63,7 +64,7 @@ const SignUp = () => {
       >
         Sign Up
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4">
         <Input
           type="text"
           placeholder="username"
@@ -86,7 +87,7 @@ const SignUp = () => {
         />
 
         <Button
-          onClick={() => {}}
+          onClick={handleSubmit}
           disabled={loading}
           primaryColor={true}
           px="px-3"
@@ -95,6 +96,7 @@ const SignUp = () => {
         >
           {loading ? "Loading..." : "SIGN UP"}
         </Button>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-5">
         <p className={p}>Have an account?</p>
