@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Button from "../components/Button";
 import UpdateProfile from "./UpdateProfile";
 import ShowListings from "./ShowListings";
 
-const Profile: React.FC = () => {
+const Profile = () => {
   type TabType = "update" | "listings";
 
   const [activeTab, setActiveTab] = useState<TabType>("update");
