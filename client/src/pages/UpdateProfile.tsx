@@ -15,8 +15,12 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "../redux/user/userSlice";
 import { app } from "../firebase";
+import { greenText, redText } from "../constants";
 
 interface FormData {
   avatar?: string;
@@ -97,6 +101,25 @@ const UpdateProfile = () => {
     }
   };
 
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <form className="flex flex-col gap-4">
@@ -117,15 +140,13 @@ const UpdateProfile = () => {
 
         <p className="text-sm self-center">
           {fileUploadError ? (
-            <span className="text-red-700 text-base font-light">
+            <span className={`${redText}`}>
               Error: Image upload failed (image must be less than 2 MB)
             </span>
           ) : filePerc > 0 && filePerc < 100 ? (
             <span className="text-textColor">{`Uploading ${filePerc}%`}</span>
           ) : filePerc === 100 ? (
-            <span className="text-green-700 text-base font-light">
-              Image successfully uploaded!
-            </span>
+            <span className={`${greenText}`}>Image successfully uploaded!</span>
           ) : (
             ""
           )}
@@ -164,12 +185,20 @@ const UpdateProfile = () => {
         >
           {loading ? "Loading..." : "UPDATE"}
         </Button>
+
+        <div className="flex justify-between mt-5">
+          <span
+            onClick={handleDeleteUser}
+            className={`${redText} cursor-pointer`}
+          >
+            Delete account
+          </span>
+          <span className={`${redText} cursor-pointer`}>Sign out</span>
+        </div>
       </form>
 
-      <p className="text-red-700 text-base font-light mt-5">
-        {error ? error : ""}
-      </p>
-      <p className="text-green-700 text-base font-light mt-5">
+      <p className={`${redText} mt-5`}>{error ? error : ""}</p>
+      <p className={`${greenText} mt-5`}>
         {updateSuccess ? "User is updated successfully!" : ""}
       </p>
     </div>

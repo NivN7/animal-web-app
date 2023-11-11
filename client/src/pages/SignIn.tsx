@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../components/Button";
-import { h2, h6, p } from "../constants";
+import { h2, h6, p, redText } from "../constants";
 import Input from "../components/Input";
 import {
   signInStart,
@@ -104,18 +104,7 @@ const SignIn = () => {
         </Link>
       </div>
 
-      {error && (
-        <p
-          className="
-            text-base 
-            font-light
-            text-red-500
-            mt-5
-          "
-        >
-          {error}
-        </p>
-      )}
+      {error && <p className={`${redText} mt-5`}>{error}</p>}
     </div>
   );
 };

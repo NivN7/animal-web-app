@@ -33,6 +33,9 @@ const h6 = "text-base text-textColor font-semibold";
 
 const p = "text-base text-textColor font-light";
 
+const redText = "text-red-700 text-base font-light";
+const greenText = "text-green-700 text-base font-light";
+
 const ic_width = "24px";
 const ic_height = "24px";
 
@@ -61,4 +64,6 @@ export {
   p,
   ic_width,
   ic_height,
+  redText,
+  greenText,
 };
