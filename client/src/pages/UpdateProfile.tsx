@@ -1,15 +1,21 @@
 import { useSelector } from "react-redux";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, ChangeEvent } from "react";
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { useDispatch } from "react-redux";
 
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { UserStateInterface } from "../redux/user/userSlice";
+import {
+  UserStateInterface,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
+} from "../redux/user/userSlice";
 import { app } from "../firebase";
 
 interface FormData {
@@ -17,7 +23,7 @@ interface FormData {
 }
 
 const UpdateProfile = () => {
-  const { currentUser } = useSelector(
+  const { currentUser, loading, error } = useSelector(
     (state: { user: UserStateInterface }) => state.user
   );
 
@@ -26,6 +32,9 @@ const UpdateProfile = () => {
   const [filePerc, setFilePerc] = useState<number>(0);
   const [fileUploadError, setFileUploadError] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({});
+
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (file) {
@@ -48,6 +57,7 @@ const UpdateProfile = () => {
       },
       (error) => {
         setFileUploadError(true);
+        console.log(error);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
@@ -55,6 +65,36 @@ const UpdateProfile = () => {
         );
       }
     );
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    try {
+      dispatch(updateUserStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateUserFailure(data.message));
+        return;
+      }
+
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(updateUserFailure(error.message));
+    }
   };
 
   return (
@@ -95,33 +135,43 @@ const UpdateProfile = () => {
           type="text"
           placeholder="username"
           id="username"
-          onChange={() => {}}
+          defaultValue={currentUser.username}
+          onChange={handleChange}
         />
 
         <Input
           type="email"
           placeholder="email"
           id="email"
-          onChange={() => {}}
+          defaultValue={currentUser.email}
+          onChange={handleChange}
         />
 
         <Input
           type="password"
           placeholder="password"
           id="password"
-          onChange={() => {}}
+          onChange={handleChange}
         />
 
         <Button
-          onClick={() => {}}
+          onClick={handleSubmit}
+          disabled={loading}
           primaryColor={true}
           px="px-3"
           py="py-3"
           rounded="rounded-lg"
         >
-          UPDATE
+          {loading ? "Loading..." : "UPDATE"}
         </Button>
       </form>
+
+      <p className="text-red-700 text-base font-light mt-5">
+        {error ? error : ""}
+      </p>
+      <p className="text-green-700 text-base font-light mt-5">
+        {updateSuccess ? "User is updated successfully!" : ""}
+      </p>
     </div>
   );
 };
