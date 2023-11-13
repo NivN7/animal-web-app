@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent } from "react";
 
 interface InputProps {
   type?: string;
@@ -6,14 +6,16 @@ interface InputProps {
   placeholder?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
+  value?: any;
 }
 
-const Input: FC<InputProps> = ({
+const Input: React.FC<InputProps> = ({
   type,
   id,
   placeholder,
   onChange,
   defaultValue,
+  value,
 }) => {
   return (
     <input
@@ -22,6 +24,7 @@ const Input: FC<InputProps> = ({
       placeholder={placeholder}
       onChange={onChange}
       defaultValue={defaultValue}
+      value={value}
       className={`
         border 
         p-3 
@@ -30,6 +33,7 @@ const Input: FC<InputProps> = ({
         text-textColor 
         border-textColor
       `}
+      required
     />
   );
 };
