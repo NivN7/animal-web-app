@@ -31,7 +31,7 @@ const listingSchema = new mongoose.Schema<IListing>(
     },
     species: {
       type: String,
-      required: [true, "Please provide category."],
+      required: [true, "Please provide species."],
     },
     age: {
       type: String,

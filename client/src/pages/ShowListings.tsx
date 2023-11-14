@@ -31,6 +31,8 @@ const ShowListings = () => {
 
       if (data.length <= 0) {
         setEmptyListings("No listing found!");
+      } else {
+        setEmptyListings("");
       }
 
       if (data.success === false) {
@@ -41,6 +43,26 @@ const ShowListings = () => {
       setUserListings(data);
     } catch (error) {
       setShowListingsError(true);
+    }
+  };
+
+  const handleListingDelete = async (listingId: string) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -111,7 +133,11 @@ const ShowListings = () => {
                 </Link>
 
                 <div className="flex justify-between item-center mx-2 mb-4">
-                  <Button redColor={true} rounded="rounded-lg">
+                  <Button
+                    redColor={true}
+                    rounded="rounded-lg"
+                    onClick={() => handleListingDelete(listing._id)}
+                  >
                     DELETE
                   </Button>
                   <Button primaryColor={true} rounded="rounded-lg">

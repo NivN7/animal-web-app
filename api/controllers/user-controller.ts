@@ -11,7 +11,7 @@ export const test = (req: Request, res: Response) => {
   });
 };
 
-interface RequestWithUser extends Request {
+export interface RequestWithUser extends Request {
   user: {
     id: string;
   };
