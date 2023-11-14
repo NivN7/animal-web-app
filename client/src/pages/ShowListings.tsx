@@ -140,7 +140,11 @@ const ShowListings = () => {
                   >
                     DELETE
                   </Button>
-                  <Button primaryColor={true} rounded="rounded-lg">
+                  <Button
+                    primaryColor={true}
+                    rounded="rounded-lg"
+                    onClick={() => navigate(`/update-listing/${listing._id}`)}
+                  >
                     EDIT
                   </Button>
                 </div>

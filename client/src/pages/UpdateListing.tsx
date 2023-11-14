@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import {
   getDownloadURL,
   getStorage,
@@ -7,7 +7,7 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Input from "../components/Input";
 import RadioButtons from "../components/RadioButton";
@@ -30,7 +30,7 @@ interface FormData {
   vaccination: string;
 }
 
-const CreateListing: React.FC = () => {
+const UpdateListing: React.FC = () => {
   const { currentUser } = useSelector(
     (state: { user: UserStateInterface }) => state.user
   );
@@ -61,6 +61,8 @@ const CreateListing: React.FC = () => {
   );
   const [uploading, setUploading] = useState(false);
 
+  const params = useParams();
+
   const speciesOption = [
     { value: "Dog", label: "Dog" },
     { value: "Cat", label: "Cat" },
@@ -80,6 +82,21 @@ const CreateListing: React.FC = () => {
     { label: "Yes", optionValue: "Yes" },
     { label: "No", optionValue: "No" },
   ];
+
+  useEffect(() => {
+    const fetchListing = async () => {
+      const listingId = params.listingId;
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setFormData(data);
+    };
+
+    fetchListing();
+  }, []);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -112,8 +129,8 @@ const CreateListing: React.FC = () => {
       setLoading(true);
       setError(false);
 
-      const res = await fetch("/api/listing/create", {
-        method: "POST",
+      const res = await fetch(`/api/listing/update/${params.listingId}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -211,7 +228,7 @@ const CreateListing: React.FC = () => {
 
   return (
     <main className="p-3 max-w-4xl mx-auto">
-      <h1 className={`${h2} text-center my-7`}>Create a Listing</h1>
+      <h2 className={`${h2} text-center my-7`}>Update a Listing</h2>
 
       <form
         onSubmit={handleSubmit}
@@ -366,7 +383,7 @@ const CreateListing: React.FC = () => {
             py="py-3"
             rounded="rounded-lg"
           >
-            {loading ? "Creating..." : "CREATE LISTINGS"}
+            {loading ? "Updating..." : "UPDATE LISTINGS"}
           </Button>
           {error && <p className={redText}>{error}</p>}
         </div>
@@ -375,4 +392,4 @@ const CreateListing: React.FC = () => {
   );
 };
 
-export default CreateListing;
+export default UpdateListing;
