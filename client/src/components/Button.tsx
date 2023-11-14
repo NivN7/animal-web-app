@@ -6,6 +6,7 @@ interface ButtonProps {
   primaryColor?: boolean;
   secondaryColor?: boolean;
   accentColor?: boolean;
+  redColor?: boolean;
   px?: string;
   py?: string;
   disabled?: boolean;
@@ -20,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   primaryColor,
   secondaryColor,
   accentColor,
+  redColor,
   rounded,
   disabled,
 }) => {
@@ -37,6 +39,8 @@ const Button: React.FC<ButtonProps> = ({
         ${secondaryColor && "bg-secondaryColor"}
         ${secondaryColor && "text-textColor"}
         ${accentColor && "bg-accentColor"}
+        ${redColor && "bg-red-500"}
+        ${redColor && "text-textColor"}
         ${px ? px : "px-8"}
         ${py ? py : "py-2"}
       `}
