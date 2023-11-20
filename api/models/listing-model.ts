@@ -1,6 +1,6 @@
 import mongoose, { Document } from "mongoose";
 
-interface IListing extends Document {
+export interface IListing extends Document {
   name: string;
   description: string;
   address: string;

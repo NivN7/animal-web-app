@@ -98,7 +98,7 @@ const ShowListings = () => {
       <h2 className={`${h2} text-center mt-10 mb-2`}>Your Listings</h2>
 
       {userListings && userListings.length > 0 && (
-        <div className="p-7 flex flex-wrap gap-8">
+        <div className="p-7 flex flex-wrap justify-center gap-8">
           {userListings.map((listing: Listing) => (
             <div
               key={listing._id}

@@ -238,6 +238,8 @@ const CreateListing: React.FC = () => {
             options={speciesOption}
             onChange={handleSelectChange}
             value={formData.species}
+            defaultLabel="species"
+            isRequired={true}
           />
 
           <Input

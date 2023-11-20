@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface SelectProps {
   options: { value: string; label: string }[];
   onChange: (selectedValue: string) => void;
   value?: string;
+  defaultLabel?: string;
+  isRequired?: boolean;
 }
 
-const Select: React.FC<SelectProps> = ({ options, onChange, value }) => {
-  const [selectedValue, setSelectedValue] = useState<string>("");
-
+const Select: React.FC<SelectProps> = ({
+  options,
+  onChange,
+  value,
+  defaultLabel,
+  isRequired,
+}) => {
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    setSelectedValue(value);
     onChange(value);
   };
 
   return (
     <select
-      value={value ? value : selectedValue}
+      value={value || ""}
       onChange={handleSelectChange}
       className="
         border 
@@ -27,9 +32,9 @@ const Select: React.FC<SelectProps> = ({ options, onChange, value }) => {
         border-textColor
         bg-backgroundColor
       "
-      required
+      required={isRequired ? true : false}
     >
-      <option value="">Select species</option>
+      <option value="">Select {defaultLabel ? defaultLabel : "option"} </option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

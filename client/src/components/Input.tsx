@@ -7,6 +7,7 @@ interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
   value?: any;
+  notRequired?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   defaultValue,
   value,
+  notRequired,
 }) => {
   return (
     <input
@@ -33,7 +35,7 @@ const Input: React.FC<InputProps> = ({
         text-textColor 
         border-textColor
       `}
-      required
+      required={notRequired ? false : true}
     />
   );
 };

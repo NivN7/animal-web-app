@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import Listing from "../models/listing-model.js";
+import Listing, { IListing } from "../models/listing-model.js";
 import { errorHandler } from "../utils/error.ts";
 import { RequestWithUser } from "./user-controller.ts";
 
@@ -79,6 +79,52 @@ export const getListing = async (
     }
 
     res.status(200).json(listing);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getListings = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { name, species, color, sort } = req.query;
+    const queryObject: Record<string, any> = {};
+
+    if (name) {
+      queryObject.name = { $regex: name, $options: "i" };
+    }
+
+    if (species) {
+      queryObject.species = species;
+    }
+
+    if (color) {
+      queryObject.color = { $regex: color, $options: "i" };
+    }
+
+    let result = Listing.find(queryObject);
+
+    if (sort) {
+      const sortString = typeof sort === "string" && sort;
+
+      const sortList = sortString.split(",").join(" ");
+      result = result.sort(sortList);
+    } else {
+      result = result.sort("createdAt");
+    }
+
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    result = result.skip(skip).limit(limit);
+
+    const listings: IListing[] = await result;
+
+    res.status(200).json({ listings, nbHits: listings.length });
   } catch (error) {
     next(error);
   }
