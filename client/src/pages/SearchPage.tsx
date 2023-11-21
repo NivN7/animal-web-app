@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import Select from "../components/Select";
 import { h2, h5, h6, p } from "../constants";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { IListing } from "../types";
 
 const speciesOption = [
   { value: "Dog", label: "Dog" },
@@ -48,8 +49,11 @@ const SearchPage = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState<IListing | any>([]);
   console.log(listings);
+
+  const [showMore, setShowMore] = useState(false);
+  const [noMoreListings, setNoMoreListings] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -73,8 +77,16 @@ const SearchPage = () => {
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
+
+      if (data.listings.length > 9) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
+
       setListings(data.listings);
       setLoading(false);
+      setNoMoreListings(false);
     };
 
     fetchListings();
@@ -114,6 +126,30 @@ const SearchPage = () => {
     const urlParams = new URLSearchParams();
     const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
     window.history.replaceState(null, "", newUrl);
+  };
+
+  const onShowMoreClick = async () => {
+    const limit = 10;
+    const currentPage: number = Math.ceil(listings.length / limit) + 1;
+
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("page", currentPage.toString());
+
+    const searchQuery = urlParams.toString();
+    console.log(searchQuery);
+
+    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const data: IListing[] | any = await res.json();
+
+    console.log(data);
+
+    if (data.listings.length > 0) {
+      setListings([...listings, ...data.listings]);
+      setNoMoreListings(false);
+    } else {
+      setShowMore(false);
+      setNoMoreListings(true);
+    }
   };
 
   return (
@@ -188,6 +224,7 @@ const SearchPage = () => {
           </Button>
         </form>
       </div>
+
       <div className="p-7 flex-1 flex flex-wrap justify-center gap-8">
         <h2 className={`${h2} text-center w-full sm:mt-0 mt-7`}>
           Search Result
@@ -236,6 +273,22 @@ const SearchPage = () => {
               </div>
             </div>
           ))}
+
+        <div className="flex justify-center w-full">
+          {!loading && showMore && (
+            <Button
+              onClick={onShowMoreClick}
+              primaryColor={true}
+              rounded="rounded-lg"
+            >
+              SHOW MORE
+            </Button>
+          )}
+
+          {!loading && noMoreListings && (
+            <p className={p}>There are no more listings to show.</p>
+          )}
+        </div>
       </div>
     </div>
   );
