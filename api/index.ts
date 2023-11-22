@@ -8,6 +8,9 @@ import userRouter from "./routes/user-route.ts";
 import authRouter from "./routes/auth-route.ts";
 import listingRouter from "./routes/listing-route.ts";
 import { errorHandlerMiddleware } from "./utils/error.ts";
+import path from "path";
+
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -20,6 +23,12 @@ app.use(cookieParser());
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 app.use(errorHandlerMiddleware);
 
