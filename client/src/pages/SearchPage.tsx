@@ -251,7 +251,11 @@ const SearchPage = () => {
                 sm:w-64
               "
             >
-              <Link to={`/listing/${listing._id}`}>
+              <Link
+                to={`/listing/${listing._id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   src={listing.imageUrls[0]}
                   alt="listing cover"

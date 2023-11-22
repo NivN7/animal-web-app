@@ -52,18 +52,18 @@ const HeroSection = (props: HeroSectionProps) => {
               "
             >
               {" "}
-              Home
+              home
             </span>
             ,
-            <br /> Save a Life
+            <br /> save a life
           </h1>
           <p className={p}>
             Discover a world of wagging tails and purring hearts. Our adoptable
             <br />
             animals are looking for love, warmth, and a place to call home. Join
+            us
             <br />
-            us on a heart-warming journey to make a difference—one paw at a
-            time.
+            on a heartwarming journey to make a difference. one paw at a time.
             <br />
           </p>
           <div className="flex gap-8 mb-8">
@@ -94,7 +94,7 @@ const HeroSection = (props: HeroSectionProps) => {
           lg:mt-0
         "
       >
-        scroll to see more
+        Scroll to see more
       </span>
     </section>
   );

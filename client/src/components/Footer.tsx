@@ -23,6 +23,9 @@ const Footer = () => {
               Copyright Ⓒ 2023 animal. All Rights Reserved.
             </li>
           </Link>
+          <Link to="/credits">
+            <li className={navlistStyle}>Credits</li>
+          </Link>
         </ul>
       </div>
     </section>

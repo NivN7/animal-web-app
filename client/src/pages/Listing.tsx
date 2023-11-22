@@ -26,6 +26,8 @@ const Listing = () => {
           return;
         }
 
+        document.title = `Animal | ${data.name}`;
+
         setListing(data);
         setLoading(false);
         setError(false);

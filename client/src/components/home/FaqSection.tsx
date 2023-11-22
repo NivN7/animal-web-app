@@ -7,32 +7,32 @@ const FaqSection = () => {
   const [accordions, setAccordion] = useState([
     {
       key: 1,
-      title: "What is animal adoption?",
+      title: "What is ANIMAL?",
       isOpen: false,
-      data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet diam erat. Aliquam et auctor enim. Nunc fringilla vestibulum fringilla. Duis venenatis ultrices diam lacinia porttitor. Etiam a nunc in arcu scelerisque elementum.`,
+      data: `ANIMAL is a dedicated pet listing platform where you can showcase your pet for potential adoptive families.`,
     },
     {
       key: 2,
-      title: "Why should I adopt a pet instead of buying one?",
-      data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet diam erat. Aliquam et auctor enim. Nunc fringilla vestibulum fringilla. Duis venenatis ultrices diam lacinia porttitor. Etiam a nunc in arcu scelerisque elementum.`,
+      title: "Why adopt instead of buy?",
+      data: `Adoption saves lives, combats overpopulation, and provides cost-effective, immediate companionship with a diverse range of healthy and ethically supported pets.`,
       isOpen: false,
     },
     {
       key: 3,
       title: "What types of animals are available for adoption?",
-      data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet diam erat. Aliquam et auctor enim. Nunc fringilla vestibulum fringilla. Duis venenatis ultrices diam lacinia porttitor. Etiam a nunc in arcu scelerisque elementum.`,
+      data: `A variety of animals are available for adoption, including Dogs, Cats, Fish, Birds, Rabbits, Guinea Pigs, and Hamsters.`,
       isOpen: false,
     },
     {
       key: 4,
-      title: "What is the adoption fee, and what does it include?",
-      data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet diam erat. Aliquam et auctor enim. Nunc fringilla vestibulum fringilla. Duis venenatis ultrices diam lacinia porttitor. Etiam a nunc in arcu scelerisque elementum.`,
+      title: "What is the adoption fee?",
+      data: `Please contact the listee directly for information on the adoption fee.`,
       isOpen: false,
     },
     {
       key: 5,
       title: "What is the adoption criteria?",
-      data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet diam erat. Aliquam et auctor enim. Nunc fringilla vestibulum fringilla. Duis venenatis ultrices diam lacinia porttitor. Etiam a nunc in arcu scelerisque elementum.`,
+      data: `Applicants must be 18 years or older.`,
       isOpen: false,
     },
   ]);

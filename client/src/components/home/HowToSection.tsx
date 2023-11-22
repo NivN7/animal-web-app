@@ -18,7 +18,7 @@ const HowToSection = () => {
           mb-12
         `}
       >
-        How to adopt or list an animal on our website?
+        How do I adopt or list a pet on this platform?
       </h2>
       <div
         className="
@@ -34,9 +34,9 @@ const HowToSection = () => {
       >
         <div className="w-full sm:w-[544px]">
           <Card
-            title="Adopting an Animal"
+            title="Adopting a pet"
             subtitle="Search for your ideal animal using our search section. Browse the list of available pets."
-            anotherSubtitle="Click on the animal card to access detailed information about the pet. Get to know your potential new family member and contact us when you're ready."
+            anotherSubtitle="Click on the animal card to access detailed information about the pet. Get to know your potential new family member, and contact the listee when you're ready."
             titleCenter={true}
             subtitleCenter={true}
           />
@@ -44,9 +44,9 @@ const HowToSection = () => {
 
         <div className="w-full sm:w-[544px]">
           <Card
-            title="Listing an Animal"
+            title="Listing a pet"
             subtitle="Log in or sign up to your profile."
-            anotherSubtitle="Visit your profile page and click the 'Add Animal' button. Fill in the necessary details and submit. It's that simple!"
+            anotherSubtitle="Visit your profile page and click the 'Create new listing' button. Fill in the necessary details and submit. It's that simple!"
             titleCenter={true}
             subtitleCenter={true}
           />

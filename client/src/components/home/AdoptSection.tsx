@@ -48,7 +48,7 @@ const AdoptSection = (props: HeroSectionProps) => {
           mb-12
         `}
       >
-        Why to adopt Animal?
+        Why adopt a pet?
       </h2>
       <div
         className="
