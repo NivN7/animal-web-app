@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import Button from "../Button";
 import HeroSectionSVG from "../svgs/HeroSectionSVG";
 import { lightAccentColor, darkAccentColor, h1, p } from "../../constants";
@@ -7,6 +9,8 @@ type HeroSectionProps = {
 };
 
 const HeroSection = (props: HeroSectionProps) => {
+  const navigate = useNavigate();
+
   return (
     <section>
       <div
@@ -73,7 +77,7 @@ const HeroSection = (props: HeroSectionProps) => {
             >
               How to adopt?
             </Button>
-            <Button onClick={() => {}} primaryColor={true}>
+            <Button onClick={() => navigate("/search")} primaryColor={true}>
               Get Started
             </Button>
           </div>
