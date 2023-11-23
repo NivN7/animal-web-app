@@ -10,8 +10,6 @@ import listingRouter from "./routes/listing-route";
 import { errorHandlerMiddleware } from "./utils/error";
 import path from "path";
 
-const __dirname = path.resolve();
-
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -24,10 +22,10 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 app.use(errorHandlerMiddleware);
