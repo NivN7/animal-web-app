@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 
-import Listing, { IListing } from "../models/listing-model.js";
-import { errorHandler } from "../utils/error.ts";
-import { RequestWithUser } from "./user-controller.ts";
+import Listing, { IListing } from "../models/listing-model";
+import { errorHandler } from "../utils/error";
+import { RequestWithUser } from "./user-controller";
 
 export const createListing = async (
   req: Request,

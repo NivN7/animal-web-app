@@ -2,8 +2,8 @@ import bcryptjs from "bcryptjs";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-import User from "../models/user-model.ts";
-import { errorHandler } from "../utils/error.ts";
+import User from "../models/user-model";
+import { errorHandler } from "../utils/error";
 
 export const signup = async (
   req: Request,

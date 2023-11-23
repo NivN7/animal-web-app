@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
-import { errorHandler } from "./error.ts";
+import { errorHandler } from "./error";
 
 interface RequestWithUser extends Request {
   user: string;

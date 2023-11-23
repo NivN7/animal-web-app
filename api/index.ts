@@ -3,11 +3,11 @@ import dotenv from "dotenv";
 dotenv.config();
 import cookieParser from "cookie-parser";
 
-import connectDB from "./db/connect.ts";
-import userRouter from "./routes/user-route.ts";
-import authRouter from "./routes/auth-route.ts";
-import listingRouter from "./routes/listing-route.ts";
-import { errorHandlerMiddleware } from "./utils/error.ts";
+import connectDB from "./db/connect";
+import userRouter from "./routes/user-route";
+import authRouter from "./routes/auth-route";
+import listingRouter from "./routes/listing-route";
+import { errorHandlerMiddleware } from "./utils/error";
 import path from "path";
 
 const __dirname = path.resolve();

@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import bcryptjs from "bcryptjs";
 
-import User from "../models/user-model.js";
-import Listing from "../models/listing-model.js";
-import { errorHandler } from "../utils/error.js";
+import User from "../models/user-model";
+import Listing from "../models/listing-model";
+import { errorHandler } from "../utils/error";
 
 export const test = (req: Request, res: Response) => {
   res.json({
