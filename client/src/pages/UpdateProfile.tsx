@@ -205,15 +205,24 @@ const UpdateProfile = () => {
         </Button>
 
         <div className="flex justify-between mt-5">
-          <span
+          <Button
             onClick={handleDeleteUser}
-            className={`${redText} cursor-pointer`}
+            redColor={true}
+            px="px-3"
+            py="py-3"
+            rounded="rounded-lg"
           >
             Delete account
-          </span>
-          <span onClick={handleSignOut} className={`${redText} cursor-pointer`}>
+          </Button>
+          <Button
+            onClick={handleSignOut}
+            secondaryColor={true}
+            px="px-3"
+            py="py-3"
+            rounded="rounded-lg"
+          >
             Sign out
-          </span>
+          </Button>
         </div>
       </form>
 
