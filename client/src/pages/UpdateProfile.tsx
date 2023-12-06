@@ -104,7 +104,8 @@ const UpdateProfile = () => {
     }
   };
 
-  const handleDeleteUser = async () => {
+  const handleDeleteUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
@@ -123,7 +124,8 @@ const UpdateProfile = () => {
     }
   };
 
-  const handleSignOut = async () => {
+  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
       dispatch(signOutUserStart());
       const res = await fetch("/api/auth/signout");
