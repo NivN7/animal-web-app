@@ -1,8 +1,12 @@
-import { useState } from "react";
+import React, { useState, Suspense } from "react";
 
 import Button from "../components/Button";
-import UpdateProfile from "./UpdateProfile";
-import ShowListings from "./ShowListings";
+import LoadingSpinner from "../components/LoadingSpinner";
+// import UpdateProfile from "./UpdateProfile";
+// import ShowListings from "./ShowListings";
+
+const LazyUpdateProfile = React.lazy(() => import("./UpdateProfile"));
+const LazyShowListings = React.lazy(() => import("./ShowListings"));
 
 const Profile = () => {
   type TabType = "update" | "listings";
@@ -42,8 +46,16 @@ const Profile = () => {
 
       {/* Render content based on active tab */}
       <div>
-        {activeTab === "listings" && <ShowListings />}
-        {activeTab === "update" && <UpdateProfile />}
+        {activeTab === "listings" && (
+          <Suspense fallback={<LoadingSpinner />}>
+            <LazyShowListings />
+          </Suspense>
+        )}
+        {activeTab === "update" && (
+          <Suspense fallback={<LoadingSpinner />}>
+            <LazyUpdateProfile />
+          </Suspense>
+        )}
       </div>
     </div>
   );

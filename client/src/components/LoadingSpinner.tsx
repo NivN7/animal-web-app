@@ -14,7 +14,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     height,
   };
 
-  return <div className="loader" style={spinnerStyle}></div>;
+  return <div className="loader mx-auto my-auto " style={spinnerStyle}></div>;
 };
 
 export default LoadingSpinner;
